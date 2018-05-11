@@ -55,7 +55,7 @@ void printSongInfo(songInfo* si)
 {
 	while(si != NULL)
 	{
-		std::cout << std::setw(40) << si->artist << std::setw(40) << si->title << std::endl;
+		std::cout << std::left << std::setw(40) << si->artist << std::setw(40) << si->title << std::endl;
 		si = si->next;
 	}
 }

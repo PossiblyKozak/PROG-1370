@@ -33,11 +33,11 @@ void printSongInfo(songInfo* si)
 {	
 	for (int i = 0; i < SONG_COUNT; i++)
 	{		
-		std::cout << std::setw(40) << si[i].artist << std::setw(40) << si[i].title << std::endl;
+		std::cout << std::left << std::setw(40) << si[i].artist << std::setw(40) << si[i].title << std::endl;
 	}
 }
 
-int main()
+int main(void)
 {
 	songInfo si[SONG_COUNT];
 
