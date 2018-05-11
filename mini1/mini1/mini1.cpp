@@ -1,3 +1,11 @@
+/*
+*  FILE          : mini1.c
+*  PROJECT       : PROG1370 - Mini-Assignment #1
+*  PROGRAMMER    : Alex Kozak
+*  FIRST VERSION : 2018-05-11
+*  DESCRIPTION   :
+*    The functions in this file are used to take in song and artist names, store them in mallock-ed memory, display them, then free the memory.
+*/
 #include <stdio.h>
 #include <string>
 #include <iostream>
@@ -5,7 +13,7 @@
 
 using namespace std;
 
-#define SONG_COUNT 3
+#define SONG_COUNT 10
 
 struct songInfo 
 {
@@ -17,8 +25,11 @@ void getSongInfo(songInfo* si, string artist, string title)
 {	
 	si->artist = (char*)malloc(artist.size() + 1);
 	si->title = (char*)malloc(title.size() + 1);
-	strcpy(si->artist, artist.c_str());
-	strcpy(si->title, title.c_str());
+	if (si->artist != nullptr && si->title != nullptr)
+	{
+		strcpy(si->artist, artist.c_str());
+		strcpy(si->title, title.c_str());
+	}
 }
 
 void printSongInfo(songInfo* si)
