@@ -6,12 +6,9 @@
 *  DESCRIPTION   :
 *    The functions in this file are used to take in song and artist names, store them in mallock-ed memory, display them, then free the memory.
 */
-#include <stdio.h>
 #include <string>
 #include <iostream>
 #include <iomanip>
-
-using namespace std;
 
 #define SONG_COUNT 10
 
@@ -21,7 +18,7 @@ struct songInfo
 	char* title;
 };
 
-void getSongInfo(songInfo* si, string artist, string title)
+void getSongInfo(songInfo* si, std::string artist, std::string title)
 {	
 	si->artist = (char*)malloc(artist.size() + 1);
 	si->title = (char*)malloc(title.size() + 1);
@@ -36,7 +33,7 @@ void printSongInfo(songInfo* si)
 {	
 	for (int i = 0; i < SONG_COUNT; i++)
 	{		
-		cout << setw(40) << si[i].artist << setw(40) << si[i].title << endl;
+		std::cout << std::setw(40) << si[i].artist << std::setw(40) << si[i].title << std::endl;
 	}
 }
 
@@ -46,14 +43,15 @@ int main()
 
 	for (int i = 0; i < SONG_COUNT; i++)
 	{
-		string artist;
-		string title;
-		cout << "Please enter the artist name:";
-		cin >> artist;
-		cout << "Please enter the title of the song:";
-		cin >> title;
+		std::string artist;
+		std::string title;
+		std::cout << "Please enter the artist name:";
+		std::cin >> artist;
+		std::cout << "Please enter the title of the song:";
+		std::cin >> title;
 		getSongInfo(&si[i], artist, title);
 	}
+
 	printSongInfo(si);
 
 	for (int i = 0; i < SONG_COUNT; i++)
