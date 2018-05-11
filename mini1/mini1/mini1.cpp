@@ -1,5 +1,5 @@
 /*
-*  FILE          : mini1.c
+*  FILE          : mini1.cpp
 *  PROJECT       : PROG1370 - Mini-Assignment #1
 *  PROGRAMMER    : Alex Kozak
 *  FIRST VERSION : 2018-05-11
