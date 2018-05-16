@@ -1,11 +1,5 @@
 #pragma once
 #include <iostream>
-struct songInfo 
-{
-	char* artist;
-	char* title;
-};
-
 struct node
 {
 	node* next;

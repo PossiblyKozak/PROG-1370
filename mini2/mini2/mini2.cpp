@@ -13,6 +13,12 @@
 
 #define SONG_COUNT 3
 
+struct songInfo
+{
+	char* artist;
+	char* title;
+};
+
 songInfo* getSongInfo(std::string artist, std::string title)
 {
 	songInfo* block = NULL;
