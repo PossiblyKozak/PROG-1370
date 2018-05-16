@@ -9,80 +9,61 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include "LinkedList.h"
 
-#define SONG_COUNT 10
+#define SONG_COUNT 3
 
-struct songInfo
-{
-	char* artist;
-	char* title;
-	songInfo* next;
-};
-
-songInfo* getSongInfo(songInfo *head, std::string artist, std::string title)
+songInfo* getSongInfo(std::string artist, std::string title)
 {
 	songInfo* block = NULL;
-	songInfo* ptr = NULL;
 
 	block = (songInfo*)malloc(sizeof(songInfo));
 	block->artist = (char*)malloc(artist.size() + 1);
 	block->title = (char*)malloc(title.size() + 1);
-	block->next = NULL;
 
 	if (block->artist != nullptr && block->title != nullptr)
 	{
 		strcpy(block->artist, artist.c_str());
 		strcpy(block->title, title.c_str());
 	}
-
-	if (head == NULL)
-	{
-		head = block;
-	}
-	else
-	{
-		ptr = head;
-		while (ptr->next != NULL)
-		{
-			ptr = ptr->next;
-		}
-		ptr->next = block;
-	}
-	return head;
+	return block;
 }
 
-void printSongInfo(songInfo* si)
+void printSongInfo(node* head)
 {
-	while(si != NULL)
+	while(head != NULL)
 	{
+		songInfo* si = (songInfo *)head->info;
 		std::cout << std::left << std::setw(40) << si->artist << std::setw(40) << si->title << std::endl;
-		si = si->next;
+		head = head->next;
 	}
 }
 
 int main()
 {
-	songInfo *head = NULL;	
+	LinkedList songInfoList;
+	songInfo si;
 
 	for (int i = 0; i < SONG_COUNT; i++)
 	{
 		std::string artist;
 		std::string title;
 		std::cout << "Please enter the artist name:";
-		std::cin >> artist;
+		std::getline(std::cin, artist);
 		std::cout << "Please enter the title of the song:";
-		std::cin >> title;
-		head = getSongInfo(head, artist, title);
+		std::getline(std::cin, title);
+		songInfoList.addNode(getSongInfo(artist, title));
 	}
 
-	printSongInfo(head);
-	songInfo *si = head->next;
+	printSongInfo(songInfoList.head);
+	node *head = songInfoList.head;
 	
-	while (si != NULL)
+	while (head != NULL)
 	{
+		songInfo *si = (songInfo *)head->info;
 		free(si->artist);
 		free(si->title);
-		si = si->next;
+		head = head->next;
 	}
 
 	return 0;
