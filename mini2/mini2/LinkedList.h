@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+
 struct node
 {
 	node* next;
@@ -9,31 +10,11 @@ struct node
 class LinkedList
 {
 private:
-	node *tail;
+	node *tail = NULL;
 public:
-	node *head;
-	LinkedList()
-	{
-		head = NULL;
-		tail = NULL;
-	}
-
-	void addNode(void* addItem)
-	{
-		node* block = (node*)malloc(sizeof(node));
-		block->info = addItem;
-		block->next = NULL;
-		
-		if (head == NULL)
-		{
-			head = block;
-			tail = block;
-			block = NULL;
-		}
-		else
-		{
-			tail->next = block;
-			tail = block;
-		}
-	}
+	node *head = NULL;
+	void AddNode(void* addItem);
+	void PrintNodes(void(*printItem)(void *data));
+	void FreeNodes(void(*freeItem)(void *item));
+	int NumNodes();
 };

@@ -13,11 +13,15 @@
 
 #define SONG_COUNT 3
 
+
+
 struct songInfo
 {
 	char* artist;
 	char* title;
 };
+
+
 
 songInfo* getSongInfo(std::string artist, std::string title)
 {
@@ -35,15 +39,25 @@ songInfo* getSongInfo(std::string artist, std::string title)
 	return block;
 }
 
-void printSongInfo(node* head)
+
+
+void freeSongInfo(void* item)
 {
-	while(head != NULL)
-	{
-		songInfo* si = (songInfo *)head->info;
-		std::cout << std::left << std::setw(40) << si->artist << std::setw(40) << si->title << std::endl;
-		head = head->next;
-	}
+	songInfo* si = (songInfo*)item;
+	free(si->artist);
+	free(si->title);
+	free(si);
 }
+
+
+
+void printSongInfo(void* info)
+{
+	songInfo* si = (songInfo *)info;
+	std::cout << std::left << std::setw(40) << si->artist << std::setw(40) << si->title << std::endl;
+}
+
+
 
 int main()
 {
@@ -58,19 +72,9 @@ int main()
 		std::getline(std::cin, artist);
 		std::cout << "Please enter the title of the song:";
 		std::getline(std::cin, title);
-		songInfoList.addNode(getSongInfo(artist, title));
+		songInfoList.AddNode(getSongInfo(artist, title));
 	}
-
-	printSongInfo(songInfoList.head);
-	node *head = songInfoList.head;
-	
-	while (head != NULL)
-	{
-		songInfo *si = (songInfo *)head->info;
-		free(si->artist);
-		free(si->title);
-		head = head->next;
-	}
-
+	songInfoList.PrintNodes(printSongInfo);
+	songInfoList.FreeNodes(freeSongInfo);
 	return 0;
 }
