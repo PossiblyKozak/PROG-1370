@@ -19,24 +19,19 @@ void LinkedList::AddNode(void* addItem)
 	}
 }
 
-void LinkedList::PrintNodes(void (*printItem)(void *data))
+void LinkedList::PrintNodes(void (*printFunction)(void *data))
 {
 	node* block = head;
 	while (block != NULL)
 	{
-		printItem(block->info);
+		printFunction(block->info);
 		block = block->next;
 	}
 }
 
-void LinkedList::FreeNodes(void (*freeItem)(void *item))
+void LinkedList::FreeNodes(void (*freeFunction)(void *item))
 {
-	node* block = head;
-	while (block != NULL)
-	{
-		freeItem(block->info);
-		block = block->next;
-	}
+	PrintNodes(freeFunction);
 }
 
 int LinkedList::NumNodes()
